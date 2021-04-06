@@ -2,19 +2,13 @@ version: "3.7"
 services:
   pipeline_service:
     image: "ml_pipeline_a:latest"
-    networks:
-      - default
     depends_on:
       - postgresdb
-    ports:
-      - "5432:5432"
-
-    restart: always
+    links:
+       - postgresdb:db
   postgresdb:
     image: "postgres:13"
     container_name: postgresdb
-    networks:
-      - default
     # command: 
       # - /media/command.sh
     env_file:
@@ -23,6 +17,6 @@ services:
       - ./db/:/var/lib/postgresql/data/pgdat
       - ./db_init/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
       - ./db_init/auto-mpg.data:/media/data/auto-mpg.data
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
     restart: always

@@ -1,5 +1,5 @@
 db_params_dic = {
-    "host"      : "localhost",
+    "host"      : "db",
     "database"  : "autompg_ml",
     "user"      : "postgres",
     "password"  : "mypass"
